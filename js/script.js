@@ -62,11 +62,26 @@
 
   };
 
+
+  const generateTags = function() {
+    const articles = document.querySelectorAll('article');
+    for (let article of articles) {
+      const tagWrapper = article.querySelector('.post-tags ul'),
+        dataTags = article.getAttribute('data-tags'),
+        tagArray = dataTags.split(' ');
+      let html = '';
+      for (let tag of tagArray) {
+        const li =  document.createElement('li');
+        html = '<span><a href="#tag-' + tag +'">' + tag + '</a>&nbsp</span>';
+        li.innerHTML = html;
+        tagWrapper.appendChild(li);
+      }
+    }
+
+  };
+
   generateTitleLinks();
-
-
-
-
+  generateTags();
 
 
 
