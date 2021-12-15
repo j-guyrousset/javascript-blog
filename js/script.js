@@ -1,7 +1,7 @@
 {
   'use strict';
 
-  const titleClickHandler = function(event){
+  const titleClickHandler = function(event) {
     event.preventDefault(); //prevents from scrolling to the position reffered on the page
     const clickedElement = this;
     console.log('link was clicked!');
@@ -27,30 +27,29 @@
     selectedArticle.classList.add('active');
     //one line code:
     //document.getElementById(clickedElement.getAttribute('href').slice(1)).classList.add('active');
-  }
+  };
 
 
-
-  const generateTitleLinks = function (){
+  const generateTitleLinks = function() {
     console.log('cleaning titles');
     const linkss = document.querySelectorAll('.titles'),
-    articles = document.querySelectorAll('article');
+      articles = document.querySelectorAll('article');
 
     /*usuń zawartość listy linków w lewej kolumnie,*/
     for(let link of linkss){
-      link.innerHTML = "";
+      link.innerHTML = '';
     }
-    
+
     //następnie dla każdego artykułu:
     for(let article of articles){
       /*odczytaj jego id i zapisz je do stałej,*/
       const articleId = article.getAttribute('id'), //article.id;
-      /*znajdź element z tytułem i zapisz jego zawartość do stałej,*/
-      articleTitle = article.children[0].innerHTML,
-      /*na podstawie tych informacji stwórz kod HTML linka i zapisz go do stałej,*/
-      textHTML = '<a ' + 'href="#' + articleId + '"><span>' + articleTitle + '</span></a>',
-      /*wstaw stworzony kod HTML do listy linków w lewej kolumnie.*/
-      li = document.createElement('li');
+        /*znajdź element z tytułem i zapisz jego zawartość do stałej,*/
+        articleTitle = article.children[0].innerHTML,
+        /*na podstawie tych informacji stwórz kod HTML linka i zapisz go do stałej,*/
+        textHTML = '<a ' + 'href="#' + articleId + '"><span>' + articleTitle + '</span></a>',
+        /*wstaw stworzony kod HTML do listy linków w lewej kolumnie.*/
+        li = document.createElement('li');
       li.innerHTML = textHTML;
       document.querySelector('.titles').appendChild(li);
     }
@@ -61,7 +60,7 @@
       link.addEventListener('click', titleClickHandler);
     }
 
-  }
+  };
 
   generateTitleLinks();
 
