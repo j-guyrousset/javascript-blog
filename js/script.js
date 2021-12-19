@@ -1,10 +1,11 @@
 {
   'use strict';
   const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
+    //optTitleSelector = '.post-title',
     optTitleListSelector = '.titles',
     optTagListSelector = '.post-tags',
-    optAuthorListSelector = '.post-authors'
+    optTagSideListSelector = '.sidebar .tags',
+    optAuthorListSelector = '.post-authors';
 
   const titleClickHandler = function(event) {
     event.preventDefault(); //prevents from scrolling to the position reffered on the page
@@ -62,7 +63,10 @@
 
 
   const generateTags = function() { //TODO add generate sidebar list of tags + count
-    const articles = document.querySelectorAll(optArticleSelector);
+    const articles = document.querySelectorAll(optArticleSelector),
+      sideTagList = document.querySelector(optTagSideListSelector);
+    let allTags = {},
+      sideHtmlTag = '';
     for (let article of articles) {
       const tagWrapper = article.querySelector(optTagListSelector + ' ul'),
         dataTags = article.getAttribute('data-tags'),
@@ -73,8 +77,28 @@
         htmlTag = '<span><a href="#tag-' + tag +'">' + tag + '</a>&nbsp</span>';
         li.innerHTML = htmlTag;
         tagWrapper.appendChild(li);
+
+        if (allTags[tag]){
+          allTags[tag] += 1;
+        } else {
+          allTags[tag] = 1;
+        }
+
+
+
+
+
       }
     }
+    console.log(allTags);
+    for(const [tag, count] of Object.entries(allTags)) {
+      const li =  document.createElement('li');
+      sideHtmlTag = '<span><a href="#tag-' + tag + '">' + tag + '(' + count + ')</a></span>';
+      li.innerHTML = sideHtmlTag;
+      sideTagList.appendChild(li);
+    }
+
+
   };
 
 
