@@ -118,3 +118,32 @@ body {
     margin: 0 10px 0 0;
   }
 }
+
+/*Tags cloud*/
+.sidebar .tags{
+  li{
+    display:inline-block;
+  }
+  .tag-size-{
+    &1{
+      font-size: 10px;
+      display:inline;
+    }
+    &2{
+      font-size: 15px;
+      display:inline;
+    }
+    &3{
+      font-size: 20px;
+      display:inline;
+    }
+    &4{
+      font-size: 25px;
+      display:inline;
+    }
+    &5{
+      font-size: 35px;
+      display:inline;
+    }
+  }
+}
