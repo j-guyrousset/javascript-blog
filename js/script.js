@@ -133,7 +133,7 @@
     const tagsParams = calculateTagsParams(allTags);
     for(const [tag, count] of Object.entries(allTags)) {
       const li =  document.createElement('li');
-      sideHtmlTag = '<span><a class="' + calculateTagClass(count,tagsParams) + '" href="#tag-' + tag + '">' + tag + '(' + count + ')</a></span>';
+      sideHtmlTag = '<span><a class="' + calculateTagClass(count,tagsParams) + '" href="#tag-' + tag + '">' + tag + '&nbsp(' + count + ')</a></span>';
       console.log('tag and counts: ', [tag, count] );
       console.log('tag class: ', calculateTagClass(count,tagsParams));
       li.innerHTML = sideHtmlTag;
@@ -204,7 +204,7 @@
 
     for (const [author, count] of Object.entries(allAuthors)){
       const li =  document.createElement('li');
-      sideHtmlAuthor = '<span><a href="#author-' + author + '">' + author + '(' + count + ')</a></span>';
+      sideHtmlAuthor = '<span><a href="#author-' + author + '">' + author + '&nbsp(' + count + ')</a></span>';
       console.log('tag and counts: ', [author, count] );
       li.innerHTML = sideHtmlAuthor;
       authorSideWrapper.appendChild(li);
