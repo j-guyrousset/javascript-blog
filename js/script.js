@@ -1,10 +1,10 @@
 {
   'use strict';
   const templates = {
-    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
-    tagLink: Handlebars.compile(document.querySelector('#template-article-tag-link').innerHTML),
-    sideTagLink: Handlebars.compile(document.querySelector('#template-side-tag-link').innerHTML),
-    authorLink: Handlebars.compile(document.querySelector('#template-article-author-link').innerHTML),
+    //articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    //tagLink: Handlebars.compile(document.querySelector('#template-article-tag-link').innerHTML),
+    generateLink: Handlebars.compile(document.querySelector('#template-link').innerHTML),
+    //authorLink: Handlebars.compile(document.querySelector('#template-article-author-link').innerHTML),
     sideAuthorLink: Handlebars.compile(document.querySelector('#template-side-author-link').innerHTML),
   };
 
@@ -67,8 +67,8 @@
     for(let article of articles){
       const articleId = article.getAttribute('id'),
         articleTitle = article.querySelector(opts.title.selector).innerHTML, //article.children[0].innerHTML,
-        linkHtmlData = {id: articleId, title: articleTitle},
-        linkHtml = templates.articleLink(linkHtmlData);
+        linkHtmlData = {class:'""', id: articleId, content: articleTitle, count:''},
+        linkHtml = templates.generateLink(linkHtmlData);
         //textHTML = '<a ' + 'href="#' + articleId + '"><span>' + articleTitle + '</span></a>',
         //li = document.createElement('li');
       console.log('linkHtml: ', linkHtml);
@@ -126,8 +126,8 @@
         tagArray = dataTags.split(' ');
 
       for (let tag of tagArray) {
-        const linkHtmlData = {tag: tag},
-          linkHtml = templates.tagLink(linkHtmlData);
+        const linkHtmlData = {class: '""', id:'tag-' + tag, content: tag, count:''},
+          linkHtml = templates.generateLink(linkHtmlData);
 
         tagWrapper.insertAdjacentHTML('beforeend', linkHtml);
 
@@ -141,8 +141,8 @@
     }
     const tagsParams = calculateTagsParams(allTags);
     for(const [tag, count] of Object.entries(allTags)) {
-      const linkHtmlSideData = {class: calculateTagClass(count,tagsParams), tag: tag, count: count,},
-        sideHtmlTag = templates.sideTagLink(linkHtmlSideData);
+      const linkHtmlSideData = {class: calculateTagClass(count,tagsParams), id: 'tag-' + tag, content: tag, count: '(' + count + ')',},
+        sideHtmlTag = templates.generateLink(linkHtmlSideData);
       console.log('tag and counts: ', [tag, count] );
       console.log('tag class: ', calculateTagClass(count,tagsParams));
       sideTagList.insertAdjacentHTML('beforeend', sideHtmlTag);
@@ -183,8 +183,7 @@
   const generateAuthors = function() {
     const articles = document.querySelectorAll(opts.articleSelector),
       authorSideWrapper = document.querySelector(opts.author.sideListSelector);
-    let allAuthors = {},
-      sideHtmlAuthor='';
+    let allAuthors = {};
 
     for (let article of articles) {
       const authorWrapper = article.querySelector(opts.author.listSelector + ' ul'),
@@ -195,8 +194,8 @@
 
 
       for (let author of authorArray) {
-        const authorHtmlData = {author: author},
-          authorHtml = templates.authorLink(authorHtmlData);
+        const authorHtmlData = {class: '"author-name"', id:'author-' + author, content: author, count: ''},
+          authorHtml = templates.generateLink(authorHtmlData);
         console.log('author: ', author);
         authorWrapper.insertAdjacentHTML('beforeend', authorHtml);
 
@@ -209,8 +208,8 @@
     }
 
     for (const [author, count] of Object.entries(allAuthors)){
-      const authorSideHtmlData = {author: author, count: count},
-        authorSideHtml = templates.sideAuthorLink(authorSideHtmlData);
+      const authorSideHtmlData = {class: '""', id: 'author-' + author, content: author, count: '(' + count + ')'},
+        authorSideHtml = templates.generateLink(authorSideHtmlData);
       console.log('tag and counts: ', [author, count] );
       authorSideWrapper.insertAdjacentHTML('beforeend', authorSideHtml);
     }
