@@ -229,20 +229,22 @@
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+    <!--
     <script id="template-article-link" type="text/x-handlebars-template">
       <li><a href="#{{ id }}"><span>{{ content }}</span></a></li>
     </script>
     <script id="template-tag-link" type="text/x-handlebars-template">
       <li><a href="#{{ id }}"><span>{{ content }}</span>&nbsp</a></li>
     </script>
-    <script id="template-link" type="text/x-handlebars-template">
-      <li><a class="{{ class }}" href="#{{ id }}"><span>{{ content }}</span></a>&nbsp{{ count }}</li>
-    </script>
-    <script id="template-article-author-link" type="text/x-handlebars-template">
-      <li><a class="author-name" href="#{{ id }}"><span>{{ content }}</span>&nbsp</a></li>
-    </script>
     <script id="template-side-author-link" type="text/x-handlebars-template">
       <li><a href="#{{ id }}"><span>{{ content }}</span></a>&nbsp({{ count }})</li>
+    </script>
+  -->
+    <script id="template-count-link" type="text/x-handlebars-template">
+      <li><a class="{{ class }}" href="#{{ id }}"><span>{{ content }}</span></a>&nbsp({{ count }})</li>
+    </script>
+    <script id="template-link" type="text/x-handlebars-template">
+      <li><a class="{{ class }}" href="#{{ id }}"><span>{{ content }}</span>&nbsp</a></li>
     </script>
     <script src="js/script.js"></script>
   </body>

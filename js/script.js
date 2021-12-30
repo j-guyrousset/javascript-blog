@@ -3,9 +3,10 @@
   const templates = {
     //articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
     //tagLink: Handlebars.compile(document.querySelector('#template-article-tag-link').innerHTML),
+    generateCountLink: Handlebars.compile(document.querySelector('#template-count-link').innerHTML),
     generateLink: Handlebars.compile(document.querySelector('#template-link').innerHTML),
     //authorLink: Handlebars.compile(document.querySelector('#template-article-author-link').innerHTML),
-    sideAuthorLink: Handlebars.compile(document.querySelector('#template-side-author-link').innerHTML),
+    //sideAuthorLink: Handlebars.compile(document.querySelector('#template-side-author-link').innerHTML),
   };
 
   const opts = {
@@ -67,7 +68,7 @@
     for(let article of articles){
       const articleId = article.getAttribute('id'),
         articleTitle = article.querySelector(opts.title.selector).innerHTML, //article.children[0].innerHTML,
-        linkHtmlData = {class:'""', id: articleId, content: articleTitle, count:''},
+        linkHtmlData = {class:'""', id: articleId, content: articleTitle},
         linkHtml = templates.generateLink(linkHtmlData);
         //textHTML = '<a ' + 'href="#' + articleId + '"><span>' + articleTitle + '</span></a>',
         //li = document.createElement('li');
@@ -126,7 +127,7 @@
         tagArray = dataTags.split(' ');
 
       for (let tag of tagArray) {
-        const linkHtmlData = {class: '""', id:'tag-' + tag, content: tag, count:''},
+        const linkHtmlData = {class: '""', id:'tag-' + tag, content: tag},
           linkHtml = templates.generateLink(linkHtmlData);
 
         tagWrapper.insertAdjacentHTML('beforeend', linkHtml);
@@ -141,8 +142,8 @@
     }
     const tagsParams = calculateTagsParams(allTags);
     for(const [tag, count] of Object.entries(allTags)) {
-      const linkHtmlSideData = {class: calculateTagClass(count,tagsParams), id: 'tag-' + tag, content: tag, count: '(' + count + ')',},
-        sideHtmlTag = templates.generateLink(linkHtmlSideData);
+      const linkHtmlSideData = {class: calculateTagClass(count,tagsParams), id: 'tag-' + tag, content: tag, count: count},
+        sideHtmlTag = templates.generateCountLink(linkHtmlSideData);
       console.log('tag and counts: ', [tag, count] );
       console.log('tag class: ', calculateTagClass(count,tagsParams));
       sideTagList.insertAdjacentHTML('beforeend', sideHtmlTag);
@@ -194,7 +195,7 @@
 
 
       for (let author of authorArray) {
-        const authorHtmlData = {class: '"author-name"', id:'author-' + author, content: author, count: ''},
+        const authorHtmlData = {class: '"author-name"', id:'author-' + author, content: author},
           authorHtml = templates.generateLink(authorHtmlData);
         console.log('author: ', author);
         authorWrapper.insertAdjacentHTML('beforeend', authorHtml);
@@ -208,8 +209,8 @@
     }
 
     for (const [author, count] of Object.entries(allAuthors)){
-      const authorSideHtmlData = {class: '""', id: 'author-' + author, content: author, count: '(' + count + ')'},
-        authorSideHtml = templates.generateLink(authorSideHtmlData);
+      const authorSideHtmlData = {class: '""', id: 'author-' + author, content: author, count: count},
+        authorSideHtml = templates.generateCountLink(authorSideHtmlData);
       console.log('tag and counts: ', [author, count] );
       authorSideWrapper.insertAdjacentHTML('beforeend', authorSideHtml);
     }
